@@ -22,4 +22,3 @@ let pqp = false // Produto quimico perigoso... kkk
                 /* usar bons nomes de variaveis para não
                  * precisar comentar para justificar o nome
                  */
-
