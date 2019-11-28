@@ -1,61 +1,42 @@
-
 var cy = cytoscape({
-    container: document.getElementById('cy'), // container to render in
-    
-    layout: {
-      name: 'random'
+
+  container: document.getElementById('cy'), // container to render in
+
+  elements: [ // list of graph elements to start with
+    { // node a
+      data: { id: 'a' }
     },
-    elements: [{
-      group: 'nodes',
-      data: {
-        id: 'n1'
-      }
-    }, {
-      group: 'nodes',
-      data: {
-        id: 'n2'
-      }
-    }, {
-      group: 'nodes',
-      data: {
-        id: 'n3'
-      }
-    }, {
-      group: 'nodes',
-      data: {
-        id: 'n4'
-      }
-    }, {
-      data: {
-        id: 'e1',
-        source: 'n1',
-        target: 'n4'
+    { // node b
+      data: { id: 'b' }
+    },
+    { // edge ab
+      data: { id: 'ab', source: 'a', target: 'b' }
+    }
+  ],
+
+  style: [ // the stylesheet for the graph
+    {
+      selector: 'node',
+      style: {
+        'background-color': '#666',
+        'label': 'data(id)'
       }
     },
-              {
-      data: {
-        id: 'e2',
-        source: 'n1',
-        target: 'n2'
+
+    {
+      selector: 'edge',
+      style: {
+        'width': 3,
+        'line-color': '#ccc',
+        'target-arrow-color': '#ccc',
+        'target-arrow-shape': 'triangle'
       }
-    }, {
-      data: {
-        id: 'e3',
-        source: 'n2',
-        target: 'n3'
-      }
-    }, {
-      data: {
-        id: 'e4',
-        source: 'n3',
-        target: 'n4'
-      }
-    }]
-  });
-  var dfs = cy.elements().aStar({
-    root: '#n1',
-    goal: '#n4',
-    directed: true
-  })
-  dfs.path.select()
-  console.log(dfs.distance)
+    }
+  ],
+
+  layout: {
+    name: 'grid',
+    rows: 1
+  }
+
+});
