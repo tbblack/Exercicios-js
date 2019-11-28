@@ -23,12 +23,12 @@
     var cat = sys.addNode('cat',{'color':'blue','shape':'dot','label':'cat'});
     var rat = sys.addNode('rat',{'color':'yellow','shape':'dot','label':'rat'});
 
-    sys.addEdge(animals, dog, 1);
-    sys.addEdge(animals, cat, 2);
-    sys.addEdge(animals, rat, 3);
-    sys.addEdge(dog, cat, 4);
-    sys.addEdge(dog, rat, 5);
-    sys.addEdge(rat, cat, 6);
+    sys.addEdge(animals, dog,{'length':.75,'color':'red'});
+    sys.addEdge(animals, cat,{'length':.75, 'pointSize':3});
+    sys.addEdge(animals, rat,{'length':.75, 'pointSize':3});
+    sys.addEdge(dog, cat,{'length':.75, 'pointSize':3});
+    sys.addEdge(dog, rat,{'length':.75, 'pointSize':3});
+    sys.addEdge(rat, cat,{'length':.75, 'pointSize':3});
 
     
 
