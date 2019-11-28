@@ -1,0 +1,154 @@
+<html>
+  <head>
+
+  <script language="javascript" type="text/javascript" src="js/jquery-3.4.1.js"></script>
+  <script language="javascript" type="text/javascript" src="js/arbor.js"></script>
+  <script language="javascript" type="text/javascript" src="js/arbor-tween.js"></script>
+  <script language="javascript" type="text/javascript" src="js/graphics.js"></script>
+  <script language="javascript" type="text/javascript" src="js/renderer.js"></script>
+
+  </head>
+    <body>
+
+    <canvas id="viewport" width="800" height="600"></canvas>
+
+    <script language="javascript" type="text/javascript">
+    var sys = arbor.ParticleSystem(0, 0 ,0.5, false);
+    sys.parameters({gravity:true});
+    sys.renderer = Renderer("#viewport") ;
+
+   
+    function PriorityQueue () {
+    this._nodes = [];
+  
+    this.enqueue = function (priority, key) {
+      this._nodes.push({key: key, priority: priority });
+      this.sort();
+    };
+    this.dequeue = function () {
+      return this._nodes.shift().key;
+    };
+    this.sort = function () {
+      this._nodes.sort(function (a, b) {
+        return a.priority - b.priority;
+      });
+    };
+    this.isEmpty = function () {
+      return !this._nodes.length;
+    };
+  }
+  
+  /**
+   * Pathfinding starts here
+   */
+  function Graph(){
+    var INFINITY = 1/0;
+    this.vertices = {};
+  
+    this.addVertex = function(name, edges){
+      this.vertices[name] = edges;
+    };
+  
+    this.shortestPath = function (start, finish) {
+      var nodes = new PriorityQueue(),
+          distances = {},
+          previous = {},
+          path = [],
+          smallest, vertex, neighbor, alt;
+  
+      for(vertex in this.vertices) {
+        if(vertex === start) {
+          distances[vertex] = 0;
+          nodes.enqueue(0, vertex);
+        }
+        else {
+          distances[vertex] = INFINITY;
+          nodes.enqueue(INFINITY, vertex);
+        }
+  
+        previous[vertex] = null;
+      }
+  
+      while(!nodes.isEmpty()) {
+        smallest = nodes.dequeue();
+  
+        if(smallest === finish) {
+          path = [];
+  
+          while(previous[smallest]) {
+            path.push(smallest);
+            smallest = previous[smallest];
+          }
+  
+          break;
+        }
+  
+        if(!smallest || distances[smallest] === INFINITY){
+          continue;
+        }
+  
+        for(neighbor in this.vertices[smallest]) {
+          alt = distances[smallest] + this.vertices[smallest][neighbor];
+  
+          if(alt < distances[neighbor]) {
+            distances[neighbor] = alt;
+            previous[neighbor] = smallest;
+  
+            nodes.enqueue(alt, neighbor);
+          }
+        }
+      }
+  
+      return path;
+    };
+  }
+  
+  var g = new Graph();
+  
+  var A = sys.addNode('A', {'color':'red','shape':'dot','label':'A'});
+  var B = sys.addNode('B', {'color':'red','shape':'dot','label':'B'});
+  var C = sys.addNode('C', {'color':'red','shape':'dot','label':'C'});
+  var D = sys.addNode('D', {'color':'red','shape':'dot','label':'D'});
+  var E = sys.addNode('E', {'color':'red','shape':'dot','label':'E'});
+  var F = sys.addNode('F', {'color':'red','shape':'dot','label':'F'});
+  var G = sys.addNode('G', {'color':'red','shape':'dot','label':'G'});
+  var H = sys.addNode('H', {'color':'red','shape':'dot','label':'H'});
+  
+  sys.addEdge(A, B, 7);
+  sys.addEdge(A, C, 8);
+  sys.addEdge(B, F, 2);
+  sys.addEdge(C, F, 6);
+  sys.addEdge(C, G, 4);
+  sys.addEdge(D, F, 8);
+  sys.addEdge(G, F, 9);
+  sys.addEdge(F, H, 3);
+  sys.addEdge(H, E, 1);
+  
+
+  // Log test, with the addition of reversing the path and prepending the first node so it's more readable
+  console.log(g.shortestPath('A', 'H').concat(['A']).reverse());
+
+
+
+
+    var animals = sys.addNode('Animals',{'color':'red','shape':'dot','label':'Animals'});
+    var dog = sys.addNode('dog',{'color':'green','shape':'dot','label':'dog'});
+    var cat = sys.addNode('cat',{'color':'blue','shape':'dot','label':'cat'});
+    var rat = sys.addNode('rat',{'color':'yellow','shape':'dot','label':'rat'});
+
+    sys.addEdge(animals, dog, 1);
+    sys.addEdge(animals, cat, 2);
+    sys.addEdge(animals, rat, 3);
+    sys.addEdge(dog, cat, 4);
+    sys.addEdge(dog, rat, 5);
+    sys.addEdge(rat, cat, 6);
+
+    var teste = getEdge
+
+    
+
+
+    </script>
+
+  </body>
+</html>

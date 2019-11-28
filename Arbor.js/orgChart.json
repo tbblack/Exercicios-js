@@ -32,6 +32,7 @@
    "Nolan":{"color":"lightblue", "shape":"rectangle", "alpha":1},
    "Quinn":{"color":"red", "shape":"dot", "alpha":1}
 },
+
 "edges":{
    "Quinn":{"Liam":{"length":2.5,"weight":2},
            "Audrey":{"length":2.5,"weight":2},
@@ -63,6 +64,6 @@
            "Grace":{"length":2.5,"weight":2},
            "Nolan":{"length":2.5,"weight":2}},
     "Connor":{"Riley":{"length":2.5,"weight":2},
-           "Emily":{"length":2.5,"weight":2}},
+           "Emily":{"length":2.5,"weight":2}}
    }
 }
