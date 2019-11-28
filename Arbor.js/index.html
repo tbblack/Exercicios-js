@@ -17,7 +17,12 @@
     sys.parameters({gravity:true});
     sys.renderer = Renderer("#viewport") ;
 
-    
+   
+
+    var animals = sys.addNode('Animals',{'color':'red','shape':'dot','label':'Animals'});
+    var dog = sys.addNode('dog',{'color':'green','shape':'dot','label':'dog'});
+    var cat = sys.addNode('cat',{'color':'blue','shape':'dot','label':'cat'});
+    var rat = sys.addNode('rat',{'color':'yellow','shape':'dot','label':'rat'});
 
     sys.addEdge(animals, dog, 1);
     sys.addEdge(animals, cat, 2);
@@ -26,22 +31,12 @@
     sys.addEdge(dog, rat, 5);
     sys.addEdge(rat, cat, 6);
 
+
+
     
-    sys.addEdge(A, B);
-    sys.addEdge(A, C);
-    sys.addEdge(B, F);
-    sys.addEdge(C, F);
-    sys.addEdge(C, G);
-    sys.addEdge(D, F);
-    sys.addEdge(G, F);
-    sys.addEdge(F, H);
-    sys.addEdge(H, E);
     
-    var teste = get.Edges(D, A);
    
     </script>
-
-    console.log(teste);
-
+    <h1>animals.name</h1>
   </body>
 </html>
